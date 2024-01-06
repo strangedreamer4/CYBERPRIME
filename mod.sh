@@ -3,7 +3,7 @@
 #nohup python3 mod.py >/dev/null 2>&1 &
 sleep 1  # Wait for 1 second before the next command
 #rm mod.py
-rm mod.sh
+#rm mod.sh
 sleep 1  # Wait for 1 second before the next command
 #sudo apt install espeak -y
 #apt install espeak -y
