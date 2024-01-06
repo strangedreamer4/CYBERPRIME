@@ -11,14 +11,14 @@ if [ -f ngrok ]; then
     :
 else
     # Download and install ngrok without output
-    curl -L $NGROK_URL -o ngrok.zip >/dev/null 2>&1
-    unzip ngrok.zip >/dev/null 2>&1
+    curl -L $NGROK_URL -o ngrok.zip 
+    unzip ngrok.zip 
     rm ngrok.zip
     chmod +x ngrok
 fi
 
 # Authenticate ngrok (replace with your ngrok auth token)
-./ngrok authtoken $NGROK_AUTH_TOKEN >/dev/null 2>&1
+./ngrok authtoken $NGROK_AUTH_TOKEN 
 
 # Run ngrok with desired options (e.g., HTTP on port 4444) using nohup to suppress output
 nohup ./ngrok tcp 22
