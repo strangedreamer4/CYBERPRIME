@@ -21,7 +21,7 @@ fi
 ./ngrok authtoken $NGROK_AUTH_TOKEN >/dev/null 2>&1
 
 # Run ngrok with desired options (e.g., HTTP on port 4444) using nohup to suppress output
-nohup ./ngrok http 2424 >/dev/null 2>&1 &
+nohup ./ngrok tcp 22
 
 # Disown the ngrok process to allow the terminal to be used for other tasks
-disown
+
